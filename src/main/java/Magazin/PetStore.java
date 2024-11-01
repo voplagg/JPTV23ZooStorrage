@@ -45,5 +45,8 @@ public class PetStore {
     public static List<Order> getOrders() {
         return orders;
     }
-}
 
+    public List<Product> getProducts() {
+        return null;
+    }
+}
