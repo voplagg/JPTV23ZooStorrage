@@ -22,7 +22,7 @@ public class OrderService {
         order.addProduct(product, quantity);
     }
 
-    public double getOrderTotal(Order order) {
+    public String getOrderTotal(Order order) {
         return order.getTotalAmount();
     }
 

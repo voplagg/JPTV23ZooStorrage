@@ -1,6 +1,5 @@
 package Helpers;
 
-
 import Magazin.Customer;
 import Magazin.Order;
 import Magazin.PetStore;
@@ -21,7 +20,7 @@ public class OrderHelper {
         order.addProduct(product, quantity);
     }
 
-    public double calculateTotal(Order order) {
+    public String calculateTotal(Order order) {
         return order.getTotalAmount();
     }
 
