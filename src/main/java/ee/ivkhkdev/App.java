@@ -4,9 +4,8 @@ import Input.InputHelper;
 import Magazin.Customer;
 import Magazin.Order;
 import Magazin.PetStore;
-import Magazin.Product;
 import Magazin.CustomerManager;
-
+import Magazin.Product;
 
 public class App {
     private static PetStore store;
@@ -66,6 +65,9 @@ public class App {
             }
         }
 
+        // Вывод списка купленных товаров
+        order.displayPurchasedItems();
+
         // Вывод суммы заказа
         System.out.println("\nСумма вашего заказа: " + order.getTotalAmount() + "$");
 
@@ -88,6 +90,7 @@ public class App {
         System.out.println("Ожидайте свой заказ в течение дня.");
     }
 }
+
 
 
 
