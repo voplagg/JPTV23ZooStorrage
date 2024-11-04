@@ -1,5 +1,8 @@
 package Tests;
 
+import Magazin.Customer;
+import Magazin.CustomerManager;
+
 public class CustomerManagerTest {
     public void runTests() {
         System.out.println("Тестирование класса CustomerManager");

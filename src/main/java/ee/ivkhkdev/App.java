@@ -8,19 +8,19 @@ import Magazin.CustomerManager;
 import Magazin.Product;
 
 public class App {
-    private static PetStore store;
-    private static CustomerManager customerManager;
+    private static PetStore store; // Магазин
+    private static CustomerManager customerManager;  // Менеджер клиентов
 
     // Запуск приложения
     public static void run() {
-        store = new PetStore();
-        customerManager = new CustomerManager();
-        addTestProducts();
+        store = new PetStore(); // Создание экземпляра магазина
+        customerManager = new CustomerManager(); // Создание менеджера клиентов
+        addTestProducts(); // Добавление тестовых продуктов
 
         System.out.println("Добро пожаловать в наш зоомагазин!");
 
         // Показ товаров и начало заказа
-        createOrderProcess();
+        createOrderProcess(); // Запуск процесса создания заказа
     }
 
     // Метод для добавления тестовых товаров
@@ -37,19 +37,19 @@ public class App {
     private static void createOrderProcess() {
         // Показ товаров в наличии
         System.out.println("\nВот что у нас есть в наличии:");
-        store.showProductsWithNumbers();
+        store.showProductsWithNumbers(); // Вывод списка продуктов
 
         // Создаем заказ
         Order order = new Order(null); // Клиент пока не добавлен
 
         // Добавляем товары в заказ
-        boolean addingProducts = true;
+        boolean addingProducts = true; // Флаг для добавления продуктов
         while (addingProducts) {
             int productNumber = InputHelper.getInt("\nВведите номер товара, который хотите купить (или '0' для завершения): ");
             if (productNumber == 0) {
-                addingProducts = false;
+                addingProducts = false; // Завершение добавления
             } else {
-                Product product = store.findProductByNumber(productNumber);
+                Product product = store.findProductByNumber(productNumber); // Поиск продукта
                 if (product != null) {
                     int quantity = InputHelper.getInt("Сколько штук товара \"" + product.getName() + "\" вы хотите добавить? ");
 
@@ -57,7 +57,7 @@ public class App {
                     if (quantity > product.getQuantity()) {
                         System.out.println("Извините, доступно только " + product.getQuantity() + " штук(и) товара \"" + product.getName() + "\".");
                     } else {
-                        order.addProduct(product, quantity);
+                        order.addProduct(product, quantity); // Добавление продукта в заказ
                     }
                 } else {
                     System.out.println("Извините, товара с номером \"" + productNumber + "\" нет в наличии.");
@@ -66,7 +66,7 @@ public class App {
         }
 
         // Вывод списка купленных товаров
-        order.displayPurchasedItems();
+        order.displayPurchasedItems(); // Отображение купленных товаров
 
         // Вывод суммы заказа
         System.out.println("\nСумма вашего заказа: " + order.getTotalAmount() + "$");
@@ -81,7 +81,7 @@ public class App {
         Customer customer = new Customer(firstName + " " + lastName, phone);
         customerManager.addCustomer(customer); // Добавляем клиента в CustomerManager
         store.addCustomer(customer); // Добавляем клиента в PetStore
-        order.setCustomer(customer);
+        order.setCustomer(customer); // Установка клиента для заказа
 
         // Сохраняем заказ
         store.addOrder(order);

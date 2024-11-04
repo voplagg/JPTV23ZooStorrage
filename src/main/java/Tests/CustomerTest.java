@@ -1,5 +1,7 @@
 package Tests;
 
+import Magazin.Customer;
+
 public class CustomerTest {
     public void runTests() {
         System.out.println("Тестирование класса Customer");

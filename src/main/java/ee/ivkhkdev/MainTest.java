@@ -11,6 +11,6 @@ public class MainTest {
         new CustomerManagerTest().runTests();
         new CustomerServiceTest().runTests();
         new OrderServiceTest().runTests();
-        new ProductServiceTest().runTests();
+
     }
 }

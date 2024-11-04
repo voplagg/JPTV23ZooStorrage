@@ -1,5 +1,8 @@
 package Tests;
 
+import Magazin.PetStore;
+import Magazin.Product;
+
 public class PetStoreTest {
     public void runTests() {
         System.out.println("Тестирование класса PetStore");

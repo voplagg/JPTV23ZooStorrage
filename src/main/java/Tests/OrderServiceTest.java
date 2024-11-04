@@ -1,5 +1,11 @@
 package Tests;
 
+import Magazin.Customer;
+import Magazin.Order;
+import Magazin.PetStore;
+import Magazin.Product;
+import Service.OrderService;
+
 public class OrderServiceTest {
     public void runTests() {
         System.out.println("Тестирование класса OrderService");
