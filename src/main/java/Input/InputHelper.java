@@ -22,6 +22,6 @@ public class InputHelper {
         System.out.print(prompt); // Вывод подсказки
         return Double.parseDouble(scanner.nextLine()); // Чтение строки и преобразование в дробное число
         }
-    }
 }
+
 

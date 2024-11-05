@@ -1,9 +1,10 @@
 package Service;
 
-import Magazin.Customer;
-import Magazin.CustomerManager;
-import Magazin.Order;
-import Magazin.PetStore;
+
+import ee.ivkhkdev.Customer;
+import ee.ivkhkdev.CustomerManager;
+import ee.ivkhkdev.Order;
+import ee.ivkhkdev.PetStore;
 
 import java.util.List;
 

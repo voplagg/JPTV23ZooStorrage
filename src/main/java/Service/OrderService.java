@@ -1,9 +1,10 @@
 package Service;
 
-import Magazin.Customer;
-import Magazin.Order;
-import Magazin.PetStore;
-import Magazin.Product;
+
+import ee.ivkhkdev.Customer;
+import ee.ivkhkdev.Order;
+import ee.ivkhkdev.PetStore;
+import ee.ivkhkdev.Product;
 
 public class OrderService {
     private PetStore petStore; // Ссылка на объект PetStore
@@ -26,7 +27,7 @@ public class OrderService {
     }
 
     // Метод для получения общей суммы заказа
-    public String getOrderTotal(Order order) {
+    public double getOrderTotal(Order order) {
         return order.getTotalAmount(); // Возврат общей суммы заказа
     }
 

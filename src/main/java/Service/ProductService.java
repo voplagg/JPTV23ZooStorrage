@@ -1,7 +1,8 @@
 package Service;
 
-import Magazin.PetStore;
-import Magazin.Product;
+
+import ee.ivkhkdev.PetStore;
+import ee.ivkhkdev.Product;
 
 import java.util.List;
 

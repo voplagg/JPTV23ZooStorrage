@@ -1,8 +1,8 @@
 package Tests;
 
-import Magazin.CustomerManager;
-import Magazin.PetStore;
 import Service.CustomerService;
+import ee.ivkhkdev.CustomerManager;
+import ee.ivkhkdev.PetStore;
 
 public class CustomerServiceTest {
     public void runTests() {

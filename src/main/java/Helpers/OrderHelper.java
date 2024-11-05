@@ -1,9 +1,10 @@
 package Helpers;
 
-import Magazin.Customer;
-import Magazin.Order;
-import Magazin.PetStore;
-import Magazin.Product;
+
+import ee.ivkhkdev.Customer;
+import ee.ivkhkdev.Order;
+import ee.ivkhkdev.PetStore;
+import ee.ivkhkdev.Product;
 
 public class OrderHelper {
     private PetStore store; // Экземпляр магазина
@@ -24,7 +25,7 @@ public class OrderHelper {
     }
 
     // Метод для расчёта общей суммы заказа
-    public String calculateTotal(Order order) {
+    public double calculateTotal(Order order) {
         return order.getTotalAmount(); // Возврат общей суммы заказа
     }
 

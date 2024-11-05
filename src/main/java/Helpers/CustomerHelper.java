@@ -1,7 +1,8 @@
 package Helpers;
 
-import Magazin.Customer;
-import Magazin.CustomerManager;
+
+import ee.ivkhkdev.Customer;
+import ee.ivkhkdev.CustomerManager;
 
 public class CustomerHelper {
     private CustomerManager customerManager; // Менеджер клиентов, который будет использоваться в классе

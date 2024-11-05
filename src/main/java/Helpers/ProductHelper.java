@@ -1,7 +1,8 @@
 package Helpers;
 
-import Magazin.PetStore;
-import Magazin.Product;
+
+import ee.ivkhkdev.PetStore;
+import ee.ivkhkdev.Product;
 
 public class ProductHelper {
     private PetStore store; // Экземпляр магазина

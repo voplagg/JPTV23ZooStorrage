@@ -1,8 +1,9 @@
 package Tests;
 
-import Magazin.Customer;
-import Magazin.Order;
-import Magazin.Product;
+
+import ee.ivkhkdev.Customer;
+import ee.ivkhkdev.Order;
+import ee.ivkhkdev.Product;
 
 public class OrderTest {
     public void runTests() {

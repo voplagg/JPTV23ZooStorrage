@@ -1,10 +1,10 @@
 package Tests;
 
-import Magazin.Customer;
-import Magazin.Order;
-import Magazin.PetStore;
-import Magazin.Product;
 import Service.OrderService;
+import ee.ivkhkdev.Customer;
+import ee.ivkhkdev.Order;
+import ee.ivkhkdev.PetStore;
+import ee.ivkhkdev.Product;
 
 public class OrderServiceTest {
     public void runTests() {

@@ -1,5 +1,7 @@
 package Magazin;
 
+import ee.ivkhkdev.Product;
+
 public class PurchasedItem {
     private Product product; // Продукт
     private int quantity; // Количество продукта

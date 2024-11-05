@@ -1,6 +1,7 @@
 package Tests;
 
-import Magazin.Product;
+
+import ee.ivkhkdev.Product;
 
 public class ProductTest {
     public void runTests() {

@@ -1,7 +1,8 @@
 package Tests;
 
-import Magazin.PetStore;
-import Magazin.Product;
+
+import ee.ivkhkdev.PetStore;
+import ee.ivkhkdev.Product;
 
 public class PetStoreTest {
     public void runTests() {

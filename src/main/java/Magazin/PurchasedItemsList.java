@@ -1,5 +1,7 @@
 package Magazin;
 
+import ee.ivkhkdev.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 
