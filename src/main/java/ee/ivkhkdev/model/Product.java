@@ -1,16 +1,18 @@
-package ee.ivkhkdev;
+package ee.ivkhkdev.model;
 
 public class Product {
     private String name; //название продукта
     private double price; //цена
     private int quantity; //количество
-    private int soldQuantity; // Сколько было продано (для рейтинга)
+
+    public Product() {
+    }
 
     public Product(String name, double price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.soldQuantity = 0; // Изначально ничего не продано
+
     }
 
     // Геттеры и сеттеры
@@ -38,24 +40,10 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public int getSoldQuantity() {
-        return soldQuantity;
-    }
-
-    public void increaseSoldQuantity(int quantity) {
-        this.soldQuantity += quantity;
-    }
-
-    // Метод для подсчёта общей суммы по продукту
-    public double getTotalSales() {
-        return soldQuantity * price;
-    }
 
     @Override
     public String toString() { //вывод инфо
-        return "Продукт: " + name + ", Цена: " + price + "$, Количество: " + quantity + ", Продано: " + soldQuantity;
+        return "Продукт: " + name + ", Цена: " + price + "$, Количество: " + quantity;
     }
 
-    public void setDiscount(int i) {
-    }
 }
