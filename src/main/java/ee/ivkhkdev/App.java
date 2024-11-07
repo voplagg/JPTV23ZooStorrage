@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class App {
     private static PetStore store; // Магазин
     private static CustomerManager customerManager;  // Менеджер клиентов
-    private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in); //сканнер для ввода с консоли
 
     public static void run() {
         store = new PetStore();
         customerManager = new CustomerManager();
-        addTestProducts();
+        addTestProducts(); //добавление тестов в магазин
 
 
         while (true) {
@@ -242,7 +242,7 @@ public class App {
         }
     }
 
-    // Прочие методы для обработки заказов, работы с клиентами и товарами можно оставить как есть.
+
 }
 
 

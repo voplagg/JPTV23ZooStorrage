@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerManager {
-    private List<Customer> customers;
+    private List<Customer> customers; //список клиентов
 
     public CustomerManager() {
-        customers = new ArrayList<>();
+        customers = new ArrayList<>(); //Конструктор инициализирует пустой список customers, в котором будут храниться объекты клиентов.
     }
 
     public void addCustomer(Customer customer) {
-        customers.add(customer);
+        customers.add(customer); //Метод добавляет нового клиента в список customers. Он принимает объект Customer и добавляет его в коллекцию.
     }
 
     public Customer findCustomerByPhone(String phone) {
         for (Customer customer : customers) {
-            if (customer.getPhone().equals(phone)) {
+            if (customer.getPhone().equals(phone)) { //Метод ищет клиента по номеру телефона. Если клиент с таким номером телефона существует в списке, возвращается объект Customer. Если клиента нет, метод возвращает null.
                 return customer;
             }
         }
@@ -24,7 +24,7 @@ public class CustomerManager {
     }
 
     public void showAllCustomers() {
-        if (customers.isEmpty()) {
+        if (customers.isEmpty()) { //Метод выводит информацию о всех клиентах в списке.
             System.out.println("Нет зарегистрированных покупателей.");
         } else {
             for (Customer customer : customers) {
@@ -41,7 +41,7 @@ public class CustomerManager {
     }
 
     public Customer getCustomerByName(String name) {
-        for (Customer customer : customers) {
+        for (Customer customer : customers) { //Метод ищет клиента по имени
             if (customer.getName().equals(name)) {
                 return customer;
             }
@@ -50,12 +50,12 @@ public class CustomerManager {
     return null;}
 
     public List<Customer> getCustomers() {
-        return customers;
+        return customers; //Метод возвращает список всех клиентов, хранящихся в объекте CustomerManager.
     }
 
     public List<Order> getOrdersByCustomer(Customer customer) {
         List<Order> orders = new ArrayList<>();
-        return orders;
+        return orders; //Этот метод принимает объект Customer и должен возвращать список заказов (Order), сделанных этим клиентом.
     }
 }
 

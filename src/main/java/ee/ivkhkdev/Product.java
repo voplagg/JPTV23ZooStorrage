@@ -1,9 +1,9 @@
 package ee.ivkhkdev;
 
 public class Product {
-    private String name;
-    private double price;
-    private int quantity;
+    private String name; //название продукта
+    private double price; //цена
+    private int quantity; //количество
     private int soldQuantity; // Сколько было продано (для рейтинга)
 
     public Product(String name, double price, int quantity) {
@@ -52,7 +52,7 @@ public class Product {
     }
 
     @Override
-    public String toString() {
+    public String toString() { //вывод инфо
         return "Продукт: " + name + ", Цена: " + price + "$, Количество: " + quantity + ", Продано: " + soldQuantity;
     }
 

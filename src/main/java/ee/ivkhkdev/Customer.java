@@ -1,8 +1,8 @@
 package ee.ivkhkdev;
 
 public class Customer {
-    private String name;
-    private String phone;
+    private String name; //имя
+    private String phone; //телефон
     private double balance; // Баланс покупателя
     private int totalPurchases;// Сколько покупок сделал клиент
 
@@ -10,7 +10,7 @@ public class Customer {
         this.name = name;
         this.phone = phone;
         this.balance = 0.0; // Изначально баланс 0
-        this.totalPurchases = 0;
+        this.totalPurchases = 0; //покупок 0
     }
 
     // Геттеры и сеттеры
@@ -49,7 +49,7 @@ public class Customer {
 
 
     @Override
-    public String toString() {
+    public String toString() { //вывод о покупателе
         return name + " (" + phone + "), Баланс: " + balance + "$, Покупок: " + totalPurchases;
     }
 }
