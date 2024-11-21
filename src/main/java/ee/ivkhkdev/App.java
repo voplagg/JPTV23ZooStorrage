@@ -1,100 +1,103 @@
 package ee.ivkhkdev;
 
-import Magazin.Customer;
-import Magazin.Order;
-import Magazin.PetStore;
-import Magazin.Product;
-import Magazin.CustomerManager;
 
-import java.util.Scanner;
+import ee.ivkhkdev.interfaces.Input;
+import ee.ivkhkdev.interfaces.Service;
+import ee.ivkhkdev.model.Customer;
+import ee.ivkhkdev.model.Product;
 
 public class App {
-    private static PetStore store;
-    private static CustomerManager customerManager; // Новый менеджер клиентов
-    private static Scanner scanner = new Scanner(System.in);
+    private final Service<Product> productService;
+    private final Input input;
+    private final Service<Customer> customerService;
 
-    // Запуск приложения
-    public static void run() {
-        store = new PetStore();
-        customerManager = new CustomerManager(); // Инициализация менеджера клиентов
-        addTestProducts(); // Добавляем тестовые товары
-
-        System.out.println("Добро пожаловать в наш зоомагазин!");
-
-        // Показ товаров и начало заказа
-        createOrderProcess();
-
-        // Закрываем сканер после завершения
-        scanner.close();
+    public App(Input input, Service<Product> productService, Service<Customer> customerService) {
+        this.input = input;
+        this.productService = productService;
+        this.customerService = customerService;
     }
 
-    // Метод для добавления тестовых товаров
-    private static void addTestProducts() {
-        store.addProduct(new Product("Корм для собак", 10.99, 23));
-        store.addProduct(new Product("Корм для кошек", 9.99, 20));
-        store.addProduct(new Product("Игрушка для кошек", 5.49, 15));
-        store.addProduct(new Product("Игрушка для собак", 3.49, 17));
-        store.addProduct(new Product("Корм для рыб", 2.99, 30));
-        store.addProduct(new Product("Корм для хомяков", 7.49, 15));
-        store.addProduct(new Product("Корм для птиц", 4.79, 11));
-    }
+    public void run() {
+        boolean repeat = true;
+        do {
+            System.out.println("\n--- Главное меню ---");
+            System.out.println("1. Выход из программы");
+            System.out.println("2. Добавить продукт");
+            System.out.println("3. Список продаваемых продуктов");
+            System.out.println("4. Добавить покупателя");
+            System.out.println("5. Список зарегистрированных покупателей");
+            System.out.println("6. Покупка покупателем продукта");
+            System.out.println("7. Оборот магазина");
+            System.out.println("8. Добавить денег покупателю");
+            System.out.println("9. Рейтинг покупателей");
+            System.out.println("10. Рейтинг товаров");
+            System.out.println("11. Редактировать товар");
+            System.out.println("12. Редактировать пользователя");
+            System.out.print("Выберите действие: ");
+            int choice = Integer.parseInt(input.nextLine());
 
-    private static void createOrderProcess() {
-        // Показ товаров в наличии
-        System.out.println("\nВот что у нас есть в наличии:");
-        store.showProductsWithNumbers();
-
-        // Создаем заказ
-        Order order = new Order(null); // Клиент пока не добавлен
-
-        // Добавляем товары в заказ
-        boolean addingProducts = true;
-        while (addingProducts) {
-            System.out.print("\nВведите номер товара, который хотите купить (или '0' для завершения): ");
-            int productNumber = Integer.parseInt(scanner.nextLine());
-            if (productNumber == 0) {
-                addingProducts = false;
-            } else {
-                Product product = store.findProductByNumber(productNumber);
-                if (product != null) {
-                    System.out.print("Сколько штук товара \"" + product.getName() + "\" вы хотите добавить? ");
-                    int quantity = Integer.parseInt(scanner.nextLine());
-
-                    // Проверка доступности товара
-                    if (quantity > product.getQuantity()) {
-                        System.out.println("Извините, доступно только " + product.getQuantity() + " штук(и) товара \"" + product.getName() + "\".");
-                    } else {
-                        order.addProduct(product, quantity);
-                    }
-                } else {
-                    System.out.println("Извините, товара с номером \"" + productNumber + "\" нет в наличии.");
-                }
+            switch (choice) {
+                case 1:
+                    System.out.println("Выход из программы...");
+                    repeat = false; // Завершаем программу
+                case 2:
+                    if(productService.add()){
+                        System.out.println("Продукт добавлен");
+                    }else{
+                        System.out.println("Продукт добавить не удалось");
+                    };
+                    break;
+                case 3:
+                    if(productService.print()){
+                        System.out.println("-------------------");
+                    }else{
+                        System.out.println("Продукт напечатать не удалось");
+                    };
+                    break;
+                case 4:
+                    if(customerService.add()){
+                        System.out.println("Покупатель добавлен");
+                    }else{
+                        System.out.println("Покупателя добавить не удалось");
+                    };
+                    break;
+                case 5:
+                    listCustomers();
+                    break;
+                case 6:
+                    createOrderProcess();
+                    break;
+                case 7:
+                    showStoreTurnover();
+                    break;
+                case 8:
+                    addMoneyToCustomer();
+                    break;
+                case 9:
+                    showCustomerRating();
+                    break;
+                case 10:
+                    showProductSalesRating();
+                    break;
+                case 11:
+                    editProduct();
+                    break;
+                case 12:
+                    editCustomer();
+                    break;
+                default:
+                    System.out.println("Неверный выбор! Попробуйте снова.");
             }
-        }
-
-        // Вывод суммы заказа
-        System.out.println("\nСумма вашего заказа: " + order.getTotalAmount() + "$");
-
-        // Ввод данных клиента
-        System.out.print("\nВведите ваше имя: ");
-        String firstName = scanner.nextLine();
-        System.out.print("Введите вашу фамилию: ");
-        String lastName = scanner.nextLine();
-        System.out.print("Введите ваш номер телефона: ");
-        String phone = scanner.nextLine();
-        System.out.print("Введите ваш номер карты: ");
-        String cart = scanner.nextLine();
-
-        // Создаем клиента и добавляем его в менеджер клиентов
-        Customer customer = new Customer(firstName + " " + lastName, phone);
-        customerManager.addCustomer(customer); // Добавляем клиента в CustomerManager
-        store.addCustomer(customer); // Добавляем клиента в PetStore
-        order.setCustomer(customer);
-
-        // Сохраняем заказ
-        store.addOrder(order);
-
-        System.out.println("\nСпасибо за покупку, " + firstName + "!");
-        System.out.println("\nОжидайте свой заказ в течении дня.");
+        }while (repeat);
+        System.out.println("До свидания!");
     }
+
+
+
+
 }
+
+
+
+
+
