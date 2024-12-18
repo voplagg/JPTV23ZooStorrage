@@ -17,7 +17,7 @@ public class JPTV23ZooStorrage {
         Input input = new ConsoleInput();
         AppHelper<Product> productAppHelper = new ProductAppHelper(input);
         Service<Product> productService = new ProductService(productAppHelper);
-        Service<Customer> customerService = new CustomerService();
+        Service<Customer> customerService = new CustomerService(input);
         App app = new App(input, productService,customerService);
         app.run();
     }

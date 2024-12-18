@@ -1,25 +1,38 @@
 package ee.ivkhkdev.model;
 
 public class Customer {
-    private String name; //имя
-    private String phone; //телефон
-    private double balance; // Баланс покупателя
+    private String name;
+    private String surname;
+    private String phone;
+    private String ID;
 
-
-    public Customer(String name, String phone) {
-        this.name = name;
-        this.phone = phone;
-        this.balance = 0.0; // Изначально баланс 0
-
+    // Пустой конструктор
+    public Customer() {
     }
 
-    // Геттеры и сеттеры
+    // Конструктор с параметрами
+    public Customer(String name, String surname, String phone, String ID) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.ID = ID;
+    }
+
+    // Геттеры и сеттеры для всех полей
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getPhone() {
@@ -30,20 +43,41 @@ public class Customer {
         this.phone = phone;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    @Override
+    public String toString() {
+        return "Покупатель: " + name + ", Фамилия: " + surname + ", Телефон: " + phone + ", ID: " + ID;
+    }
+
+    public void addSpentPrice(double totalPrice) {
+    }
+
+    public double getSpentPrice() {
+        return 0;
+    }
+
+    public void setBalance(double remainingBalance) {
+
+    }
+
     public double getBalance() {
-        return balance;
+        return 0;
+    }
+
+    public void setSpentPrice(double updatedSpentAmount) {
+
     }
 
     public void addBalance(double amount) {
-        this.balance += amount; // Добавление денег на баланс
-    }
-
-
-
-
-
-    @Override
-    public String toString() { //вывод о покупателе
-        return name + " (" + phone + "), Баланс: " + balance;
     }
 }
+
+
+

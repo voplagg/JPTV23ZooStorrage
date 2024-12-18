@@ -8,5 +8,5 @@ public interface Service<T> {
     boolean edit();
     boolean remove();
     List<T> list();
-
+    List<T> SortedCustomer();
 }

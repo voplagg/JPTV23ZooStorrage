@@ -1,15 +1,20 @@
 package ee.ivkhkdev;
 
-
 import ee.ivkhkdev.interfaces.Input;
 import ee.ivkhkdev.interfaces.Service;
 import ee.ivkhkdev.model.Customer;
 import ee.ivkhkdev.model.Product;
+import ee.ivkhkdev.services.CustomerBalanceService;
+import ee.ivkhkdev.services.OrderService;
+
+import java.util.List;
 
 public class App {
     private final Service<Product> productService;
     private final Input input;
     private final Service<Customer> customerService;
+    private OrderService orderService;
+
 
     public App(Input input, Service<Product> productService, Service<Customer> customerService) {
         this.input = input;
@@ -40,64 +45,87 @@ public class App {
                 case 1:
                     System.out.println("Выход из программы...");
                     repeat = false; // Завершаем программу
+                    break;
                 case 2:
-                    if(productService.add()){
-                        System.out.println("Продукт добавлен");
-                    }else{
-                        System.out.println("Продукт добавить не удалось");
-                    };
+                    if (productService.add()) {
+                        System.out.println("Продукт успешно добавлен.");
+                    } else {
+                        System.out.println("Не удалось добавить продукт.");
+                    }
+                    System.out.println("Список товаров:");
+                    productService.print(); // Печать списка товаров после добавления
                     break;
                 case 3:
-                    if(productService.print()){
+                    if (productService.print()) {
                         System.out.println("-------------------");
-                    }else{
+                    } else {
                         System.out.println("Продукт напечатать не удалось");
-                    };
+                    }
                     break;
                 case 4:
-                    if(customerService.add()){
-                        System.out.println("Покупатель добавлен");
-                    }else{
-                        System.out.println("Покупателя добавить не удалось");
-                    };
+                    if (customerService.add()) {
+                        System.out.println("Покупатель успешно добавлен.");
+                    } else {
+                        System.out.println("Не удалось добавить покупателя.");
+                    }
                     break;
                 case 5:
-                    listCustomers();
+                    System.out.println("Список зарегистрированных покупателей:");
+                    customerService.list().forEach(customer -> System.out.println(customer));
                     break;
                 case 6:
-                    createOrderProcess();
+                    orderService.createOrder(); // Вызываем метод для создания заказа
                     break;
                 case 7:
-                    showStoreTurnover();
+                    double totalTurnover = orderService.calculateStoreTurnover();
+                    System.out.println("Общий оборот магазина: " + totalTurnover + " $");
                     break;
                 case 8:
-                    addMoneyToCustomer();
+                    System.out.println("Введите ID покупателя:");
+                    int customerIdToAddMoney = Integer.parseInt(input.nextLine());  // Ввод ID
+                    System.out.println("Введите сумму для добавления:");
+                    double amountToAdd = Double.parseDouble(input.nextLine());
+                    CustomerBalanceService balanceService = new CustomerBalanceService(customerService);
+                    balanceService.addBalanceToCustomer(customerIdToAddMoney, amountToAdd);
                     break;
                 case 9:
-                    showCustomerRating();
+                    System.out.println("Рейтинг покупателей по потраченной сумме:");
+                    List<Customer> sortedCustomers = customerService.SortedCustomer();
+                    for (int i = 0; i < sortedCustomers.size(); i++) {
+                        Customer customer = sortedCustomers.get(i);
+                        System.out.println((i + 1) + ". " + customer.getName() + " - Потрачено: " + customer.getPhone() + "$");
+                    }
                     break;
                 case 10:
-                    showProductSalesRating();
+                    System.out.println("Рейтинг товаров:");
+                    List<Product> products = productService.list();
+                    products.sort((p1, p2) -> Integer.compare(p2.getQuantity(), p1.getQuantity())); // Сортировка по убыванию
+                    for (Product product : products) {
+                        System.out.println(product.getName() + " - Продано: " + (product.getQuantity() - product.getQuantity()));
+                    }
                     break;
                 case 11:
-                    editProduct();
+                    if (productService.edit()) {
+                        System.out.println("Продукт успешно отредактирован.");
+                    } else {
+                        System.out.println("Не удалось отредактировать продукт.");
+                    }
                     break;
                 case 12:
-                    editCustomer();
+                    if (customerService.edit()) {
+                        System.out.println("Покупатель успешно отредактирован.");
+                    } else {
+                        System.out.println("Не удалось отредактировать покупателя.");
+                    }
                     break;
                 default:
                     System.out.println("Неверный выбор! Попробуйте снова.");
             }
-        }while (repeat);
+        } while (repeat);
         System.out.println("До свидания!");
+
+
     }
-
-
-
-
 }
-
-
-
 
 
