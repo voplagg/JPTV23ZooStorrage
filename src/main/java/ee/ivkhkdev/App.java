@@ -73,13 +73,13 @@ public class App {
                     System.out.println("Список зарегистрированных покупателей:");
                     customerService.list().forEach(customer -> System.out.println(customer));
                     break;
-                case 6:
-                    orderService.createOrder(); // Вызываем метод для создания заказа
-                    break;
-                case 7:
-                    double totalTurnover = orderService.calculateStoreTurnover();
-                    System.out.println("Общий оборот магазина: " + totalTurnover + " $");
-                    break;
+                //case 6:
+                    //orderService.createOrder(); // Вызываем метод для создания заказа
+                    //break;
+                //case 7:
+                    //double totalTurnover = orderService.calculateStoreTurnover();
+                    //System.out.println("Общий оборот магазина: " + totalTurnover + " $");
+                    //break;
                 case 8:
                     System.out.println("Введите ID покупателя:");
                     int customerIdToAddMoney = Integer.parseInt(input.nextLine());  // Ввод ID
