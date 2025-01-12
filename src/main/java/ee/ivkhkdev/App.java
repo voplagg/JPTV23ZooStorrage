@@ -5,7 +5,7 @@ import ee.ivkhkdev.interfaces.Service;
 import ee.ivkhkdev.model.Customer;
 import ee.ivkhkdev.model.Product;
 import ee.ivkhkdev.services.CustomerBalanceService;
-import ee.ivkhkdev.services.OrderService;
+
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class App {
     private final Service<Product> productService;
     private final Input input;
     private final Service<Customer> customerService;
-    private OrderService orderService;
+
 
 
     public App(Input input, Service<Product> productService, Service<Customer> customerService) {
@@ -31,13 +31,11 @@ public class App {
             System.out.println("3. Список продаваемых продуктов");
             System.out.println("4. Добавить покупателя");
             System.out.println("5. Список зарегистрированных покупателей");
-            System.out.println("6. Покупка покупателем продукта");
-            System.out.println("7. Оборот магазина");
-            System.out.println("8. Добавить денег покупателю");
-            System.out.println("9. Рейтинг покупателей");
-            System.out.println("10. Рейтинг товаров");
-            System.out.println("11. Редактировать товар");
-            System.out.println("12. Редактировать пользователя");
+            System.out.println("6. Добавить денег покупателю");
+            System.out.println("7. Рейтинг покупателей");
+            System.out.println("8. Рейтинг товаров");
+            System.out.println("9. Редактировать товар");
+            System.out.println("10. Редактировать пользователя");
             System.out.print("Выберите действие: ");
             int choice = Integer.parseInt(input.nextLine());
 
@@ -73,14 +71,7 @@ public class App {
                     System.out.println("Список зарегистрированных покупателей:");
                     customerService.list().forEach(customer -> System.out.println(customer));
                     break;
-                //case 6:
-                    //orderService.createOrder(); // Вызываем метод для создания заказа
-                    //break;
-                //case 7:
-                    //double totalTurnover = orderService.calculateStoreTurnover();
-                    //System.out.println("Общий оборот магазина: " + totalTurnover + " $");
-                    //break;
-                case 8:
+                case 6:
                     System.out.println("Введите ID покупателя:");
                     int customerIdToAddMoney = Integer.parseInt(input.nextLine());  // Ввод ID
                     System.out.println("Введите сумму для добавления:");
@@ -88,7 +79,7 @@ public class App {
                     CustomerBalanceService balanceService = new CustomerBalanceService(customerService);
                     balanceService.addBalanceToCustomer(customerIdToAddMoney, amountToAdd);
                     break;
-                case 9:
+                case 7:
                     System.out.println("Рейтинг покупателей по потраченной сумме:");
                     List<Customer> sortedCustomers = customerService.SortedCustomer();
                     for (int i = 0; i < sortedCustomers.size(); i++) {
@@ -96,7 +87,7 @@ public class App {
                         System.out.println((i + 1) + ". " + customer.getName() + " - Потрачено: " + customer.getPhone() + "$");
                     }
                     break;
-                case 10:
+                case 8:
                     System.out.println("Рейтинг товаров:");
                     List<Product> products = productService.list();
                     products.sort((p1, p2) -> Integer.compare(p2.getQuantity(), p1.getQuantity())); // Сортировка по убыванию
@@ -104,14 +95,14 @@ public class App {
                         System.out.println(product.getName() + " - Продано: " + (product.getQuantity() - product.getQuantity()));
                     }
                     break;
-                case 11:
+                case 9:
                     if (productService.edit()) {
                         System.out.println("Продукт успешно отредактирован.");
                     } else {
                         System.out.println("Не удалось отредактировать продукт.");
                     }
                     break;
-                case 12:
+                case 10:
                     if (customerService.edit()) {
                         System.out.println("Покупатель успешно отредактирован.");
                     } else {
