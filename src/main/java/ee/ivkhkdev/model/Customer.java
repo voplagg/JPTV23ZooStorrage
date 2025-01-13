@@ -5,6 +5,8 @@ public class Customer {
     private String surname;
     private String phone;
     private String ID;
+    private double balance;  // Поле для хранения баланса покупателя
+    private double spentPrice;  // Поле для хранения потраченной суммы
 
     // Пустой конструктор
     public Customer() {
@@ -16,6 +18,8 @@ public class Customer {
         this.surname = surname;
         this.phone = phone;
         this.ID = ID;
+        this.balance = 0.0; // Инициализация с нулевым балансом
+        this.spentPrice = 0.0; // Инициализация с нулевым расходом
     }
 
     // Геттеры и сеттеры для всех полей
@@ -51,31 +55,48 @@ public class Customer {
         this.ID = ID;
     }
 
+    // Метод toString для отображения информации о покупателе
     @Override
     public String toString() {
-        return "Покупатель: " + name + ", Фамилия: " + surname + ", Телефон: " + phone + ", ID: " + ID;
+        return "Покупатель: " + name + ", Фамилия: " + surname + ", Телефон: " + phone + ", ID: " + ID + ", Баланс: " + balance + ", Потраченная сумма: " + spentPrice;
     }
 
-    public void addSpentPrice(double totalPrice) {
-    }
-
-    public double getSpentPrice() {
-        return 0;
-    }
-
-    public void setBalance(double remainingBalance) {
-
-    }
-
-    public double getBalance() {
-        return 0;
-    }
-
-    public void setSpentPrice(double updatedSpentAmount) {
-
-    }
-
+    // Метод для добавления баланса
     public void addBalance(double amount) {
+        if (amount > 0) {
+            this.balance += amount; // Увеличиваем баланс покупателя
+        }
+    }
+
+    // Геттер для баланса
+    public double getBalance() {
+        return balance;
+    }
+
+    // Метод для добавления потраченной суммы
+    public void addSpentPrice(double totalPrice) {
+        if (totalPrice > 0) {
+            this.spentPrice += totalPrice; // Увеличиваем потраченную сумму
+        }
+    }
+
+    // Геттер для потраченной суммы
+    public double getSpentPrice() {
+        return spentPrice;
+    }
+
+    // Метод для изменения потраченной суммы
+    public void setSpentPrice(double updatedSpentAmount) {
+        if (updatedSpentAmount >= 0) {
+            this.spentPrice = updatedSpentAmount; // Обновляем потраченную сумму
+        }
+    }
+
+    // Метод для изменения баланса (например, при списании средств)
+    public void setBalance(double updatedBalance) {
+        if (updatedBalance >= 0) {
+            this.balance = updatedBalance; // Обновляем баланс
+        }
     }
 }
 

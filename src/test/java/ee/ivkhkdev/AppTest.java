@@ -10,12 +10,10 @@ import ee.ivkhkdev.services.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.List;
 
-public class AppTest {
-
+import static org.junit.jupiter.api.Assertions.*;
+class AppTest {
     private App app;
     private ProductService productService;
     private CustomerService customerService;

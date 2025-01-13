@@ -32,9 +32,15 @@ public class CustomerService implements Service<Customer> {
         System.out.print("Введите ID покупателя: ");
         String ID = input.nextLine(); // Считываем ID
 
+        // Проверка на null или пустые значения
+        if (name == null || name.isEmpty() || surname == null || surname.isEmpty() ||
+                phone == null || phone.isEmpty() || ID == null || ID.isEmpty()) {
+            System.out.println("Все поля должны быть заполнены.");
+            return false;
+        }
+
         // Создаем покупателя с введенными данными
         Customer customer = new Customer(name, surname, phone, ID);
-
         customers.add(customer); // Добавляем покупателя в список
         return true;
     }
