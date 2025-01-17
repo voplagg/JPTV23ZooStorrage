@@ -1,38 +1,35 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.interfaces.AppHelper;
-import ee.ivkhkdev.interfaces.Service;
+import ee.ivkhkdev.ProductDAO;
+import ee.ivkhkdev.helpers.ProductAppHelper;
 import ee.ivkhkdev.model.Product;
+import ee.ivkhkdev.interfaces.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService implements Service<Product> {
-    private final AppHelper<Product> productAppHelper;
-    private final List<Product> products; // Список товаров
+    private final ProductDAO productDAO;
 
-    public ProductService(AppHelper<Product> productAppHelper) {
-        this.productAppHelper = productAppHelper;
-        this.products = new ArrayList<>(); // Изначально список пуст
+    public ProductService(ProductDAO productDAO) {
+        this.productDAO = productDAO;
     }
 
     @Override
     public boolean add() {
-        Product product = productAppHelper.create(); // Создание нового продукта через helper
-        if (product != null) {
-            products.add(product); // Добавляем продукт в список
-            return true;
-        }
-        return false;
+        // Пример добавления продукта
+        Product product = new Product("Laptop", 1000.0, 10); // Создаём новый продукт
+        productDAO.saveProduct(product);  // Сохраняем в базе данных
+        return true;
     }
 
     @Override
     public boolean print() {
+        List<Product> products = productDAO.getAllProducts(); // Получаем все продукты из базы данных
         if (products.isEmpty()) {
             System.out.println("Список товаров пуст.");
             return false;
         }
-        // Печать всех товаров в списке
+        // Печать всех товаров
         products.forEach(System.out::println);
         return true;
     }
@@ -51,7 +48,7 @@ public class ProductService implements Service<Product> {
 
     @Override
     public List<Product> list() {
-        return products; // Возвращаем текущий список товаров
+        return productDAO.getAllProducts();
     }
 
     @Override
@@ -59,5 +56,7 @@ public class ProductService implements Service<Product> {
         return List.of();
     }
 }
+
+
 
 
