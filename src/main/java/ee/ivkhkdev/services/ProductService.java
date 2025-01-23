@@ -1,62 +1,57 @@
 package ee.ivkhkdev.services;
 
-import ee.ivkhkdev.ProductDAO;
 import ee.ivkhkdev.helpers.ProductAppHelper;
 import ee.ivkhkdev.model.Product;
 import ee.ivkhkdev.interfaces.Service;
+import ee.ivkhkdev.interfaces.Input;
 
 import java.util.List;
 
 public class ProductService implements Service<Product> {
-    private final ProductDAO productDAO;
+    private final ProductAppHelper productAppHelper;
+    private final List<Product> productList; // Assume product list is handled in memory or fetched from database
 
-    public ProductService(ProductDAO productDAO) {
-        this.productDAO = productDAO;
+    public ProductService(ProductAppHelper productAppHelper, List<Product> productList) {
+        this.productAppHelper = productAppHelper;
+        this.productList = productList;
     }
 
     @Override
     public boolean add() {
-        // Пример добавления продукта
-        Product product = new Product("Laptop", 1000.0, 10); // Создаём новый продукт
-        productDAO.saveProduct(product);  // Сохраняем в базе данных
+        // Using the ProductAppHelper to create a new product
+        Product newProduct = productAppHelper.create(); // Collects product data from the user input
+        productList.add(newProduct); // Adds the new product to the product list or database
         return true;
     }
 
     @Override
     public boolean print() {
-        List<Product> products = productDAO.getAllProducts(); // Получаем все продукты из базы данных
-        if (products.isEmpty()) {
-            System.out.println("Список товаров пуст.");
-            return false;
-        }
-        // Печать всех товаров
-        products.forEach(System.out::println);
-        return true;
+        return productAppHelper.printList(productList); // Prints the list using the helper
     }
 
     @Override
     public boolean edit() {
-        // Логика редактирования товара
+        // You can implement logic to update a product, using productAppHelper or other methods
+        // The implementation would depend on the actual requirements (e.g., selecting a product to modify)
         return false;
     }
 
     @Override
     public boolean remove() {
-        // Логика удаления товара
+        // Implement the logic to remove a product (e.g., by selecting a product to delete)
         return false;
     }
 
     @Override
     public List<Product> list() {
-        return productDAO.getAllProducts();
+        return productList; // Returns the list of products
     }
 
     @Override
     public List<Product> SortedCustomer() {
-        return List.of();
+        // Sorting logic can be implemented here if needed
+        return List.of(); // Placeholder
     }
 }
-
-
 
 

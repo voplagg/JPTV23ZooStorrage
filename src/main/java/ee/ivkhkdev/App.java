@@ -6,15 +6,12 @@ import ee.ivkhkdev.model.Customer;
 import ee.ivkhkdev.model.Product;
 import ee.ivkhkdev.services.CustomerBalanceService;
 
-
 import java.util.List;
 
 public class App {
     private final Service<Product> productService;
     private final Input input;
     private final Service<Customer> customerService;
-
-
 
     public App(Input input, Service<Product> productService, Service<Customer> customerService) {
         this.input = input;
@@ -51,13 +48,13 @@ public class App {
                         System.out.println("Не удалось добавить продукт.");
                     }
                     System.out.println("Список товаров:");
-                    productService.print(); // Печать списка товаров после добавления
+                    productService.print();
                     break;
                 case 3:
                     if (productService.print()) {
                         System.out.println("-------------------");
                     } else {
-                        System.out.println("Продукт напечатать не удалось");
+                        System.out.println("Не удалось вывести список товаров");
                     }
                     break;
                 case 4:
@@ -69,15 +66,15 @@ public class App {
                     break;
                 case 5:
                     System.out.println("Список зарегистрированных покупателей:");
-                    customerService.list().forEach(customer -> System.out.println(customer));
+                    customerService.list().forEach(System.out::println);
                     break;
                 case 6:
                     System.out.println("Введите ID покупателя:");
-                    int customerIdToAddMoney = Integer.parseInt(input.nextLine());  // Ввод ID
+                    int customerId = Integer.parseInt(input.nextLine());
                     System.out.println("Введите сумму для добавления:");
-                    double amountToAdd = Double.parseDouble(input.nextLine());
+                    double amount = Double.parseDouble(input.nextLine());
                     CustomerBalanceService balanceService = new CustomerBalanceService(customerService);
-                    balanceService.addBalanceToCustomer(customerIdToAddMoney, amountToAdd);
+                    balanceService.addBalanceToCustomer(customerId, amount);
                     break;
                 case 7:
                     System.out.println("Рейтинг покупателей по потраченной сумме:");
@@ -90,7 +87,7 @@ public class App {
                 case 8:
                     System.out.println("Рейтинг товаров:");
                     List<Product> products = productService.list();
-                    products.sort((p1, p2) -> Integer.compare(p2.getQuantity(), p1.getQuantity())); // Сортировка по убыванию
+                    products.sort((p1, p2) -> Integer.compare(p2.getQuantity(), p1.getQuantity()));
                     for (Product product : products) {
                         System.out.println(product.getName() + " - Продано: " + (product.getQuantity() - product.getQuantity()));
                     }
@@ -114,9 +111,8 @@ public class App {
             }
         } while (repeat);
         System.out.println("До свидания!");
-
-
     }
 }
+
 
 
