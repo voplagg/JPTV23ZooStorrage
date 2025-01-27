@@ -5,6 +5,7 @@ import ee.ivkhkdev.interfaces.Service;
 import ee.ivkhkdev.model.Customer;
 import ee.ivkhkdev.model.Product;
 import ee.ivkhkdev.services.CustomerBalanceService;
+import ee.ivkhkdev.services.CustomerService;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class App {
     private final Input input;
     private final Service<Customer> customerService;
 
+    // Конструктор для внедрения зависимостей
     public App(Input input, Service<Product> productService, Service<Customer> customerService) {
         this.input = input;
         this.productService = productService;
@@ -41,6 +43,7 @@ public class App {
                     System.out.println("Выход из программы...");
                     repeat = false; // Завершаем программу
                     break;
+
                 case 2:
                     if (productService.add()) {
                         System.out.println("Продукт успешно добавлен.");
@@ -48,15 +51,17 @@ public class App {
                         System.out.println("Не удалось добавить продукт.");
                     }
                     System.out.println("Список товаров:");
-                    productService.print();
+                    productService.print(); // Выводим список товаров
                     break;
+
                 case 3:
                     if (productService.print()) {
                         System.out.println("-------------------");
                     } else {
-                        System.out.println("Не удалось вывести список товаров");
+                        System.out.println("Не удалось вывести список товаров.");
                     }
                     break;
+
                 case 4:
                     if (customerService.add()) {
                         System.out.println("Покупатель успешно добавлен.");
@@ -64,10 +69,12 @@ public class App {
                         System.out.println("Не удалось добавить покупателя.");
                     }
                     break;
+
                 case 5:
                     System.out.println("Список зарегистрированных покупателей:");
                     customerService.list().forEach(System.out::println);
                     break;
+
                 case 6:
                     System.out.println("Введите ID покупателя:");
                     int customerId = Integer.parseInt(input.nextLine());
@@ -76,6 +83,7 @@ public class App {
                     CustomerBalanceService balanceService = new CustomerBalanceService(customerService);
                     balanceService.addBalanceToCustomer(customerId, amount);
                     break;
+
                 case 7:
                     System.out.println("Рейтинг покупателей по потраченной сумме:");
                     List<Customer> sortedCustomers = customerService.SortedCustomer();
@@ -84,6 +92,7 @@ public class App {
                         System.out.println((i + 1) + ". " + customer.getName() + " - Потрачено: " + customer.getPhone() + "$");
                     }
                     break;
+
                 case 8:
                     System.out.println("Рейтинг товаров:");
                     List<Product> products = productService.list();
@@ -92,6 +101,7 @@ public class App {
                         System.out.println(product.getName() + " - Продано: " + (product.getQuantity() - product.getQuantity()));
                     }
                     break;
+
                 case 9:
                     if (productService.edit()) {
                         System.out.println("Продукт успешно отредактирован.");
@@ -99,6 +109,7 @@ public class App {
                         System.out.println("Не удалось отредактировать продукт.");
                     }
                     break;
+
                 case 10:
                     if (customerService.edit()) {
                         System.out.println("Покупатель успешно отредактирован.");
@@ -106,6 +117,7 @@ public class App {
                         System.out.println("Не удалось отредактировать покупателя.");
                     }
                     break;
+
                 default:
                     System.out.println("Неверный выбор! Попробуйте снова.");
             }
@@ -113,6 +125,7 @@ public class App {
         System.out.println("До свидания!");
     }
 }
+
 
 
 

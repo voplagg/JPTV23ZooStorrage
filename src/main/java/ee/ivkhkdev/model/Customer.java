@@ -1,28 +1,47 @@
 package ee.ivkhkdev.model;
 
-public class Customer {
-    private String name;
-    private String surname;
-    private String phone;
-    private String ID;
-    private double balance;  // Поле для хранения баланса покупателя
-    private double spentPrice;  // Поле для хранения потраченной суммы
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
-    // Пустой конструктор
+@Entity // Аннотация для указания на сущность в JPA
+public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Автоматическая генерация ID при вставке
+    private Long id; // Идентификатор клиента в базе данных
+
+    private String name; // Имя клиента
+    private String surname; // Фамилия клиента
+    private String phone; // Телефон клиента
+    private String customerId; // Внешний идентификатор клиента (может быть использован, например, для уникального номера)
+
+    private double balance; // Баланс клиента
+    private double spentPrice; // Потраченная сумма
+
+    // Пустой конструктор для JPA
     public Customer() {
     }
 
-    // Конструктор с параметрами
-    public Customer(String name, String surname, String phone, String ID) {
+    // Конструктор с параметрами для удобства создания объектов
+    public Customer(String name, String surname, String phone, String customerId) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
-        this.ID = ID;
-        this.balance = 0.0; // Инициализация с нулевым балансом
-        this.spentPrice = 0.0; // Инициализация с нулевым расходом
+        this.customerId = customerId;
+        this.balance = 0.0; // Инициализация баланса 0
+        this.spentPrice = 0.0; // Инициализация потраченной суммы 0
     }
 
-    // Геттеры и сеттеры для всех полей
+    // Геттеры и сеттеры
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -47,33 +66,33 @@ public class Customer {
         this.phone = phone;
     }
 
-    public String getID() {
-        return ID;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
-    // Метод toString для отображения информации о покупателе
+    // Метод для отображения информации о клиенте
     @Override
     public String toString() {
-        return "Покупатель: " + name + ", Фамилия: " + surname + ", Телефон: " + phone + ", ID: " + ID + ", Баланс: " + balance + ", Потраченная сумма: " + spentPrice;
+        return "Покупатель: " + name + ", Фамилия: " + surname + ", Телефон: " + phone + ", ID: " + customerId + ", Баланс: " + balance + ", Потраченная сумма: " + spentPrice;
     }
 
-    // Метод для добавления баланса
+    // Метод для увеличения баланса клиента
     public void addBalance(double amount) {
         if (amount > 0) {
-            this.balance += amount; // Увеличиваем баланс покупателя
+            this.balance += amount; // Увеличиваем баланс на указанную сумму
         }
     }
 
-    // Геттер для баланса
+    // Метод для получения текущего баланса
     public double getBalance() {
         return balance;
     }
 
-    // Метод для добавления потраченной суммы
+    // Метод для увеличения потраченной суммы
     public void addSpentPrice(double totalPrice) {
         if (totalPrice > 0) {
             this.spentPrice += totalPrice; // Увеличиваем потраченную сумму
@@ -85,20 +104,21 @@ public class Customer {
         return spentPrice;
     }
 
-    // Метод для изменения потраченной суммы
+    // Метод для обновления потраченной суммы
     public void setSpentPrice(double updatedSpentAmount) {
         if (updatedSpentAmount >= 0) {
             this.spentPrice = updatedSpentAmount; // Обновляем потраченную сумму
         }
     }
 
-    // Метод для изменения баланса (например, при списании средств)
+    // Метод для обновления баланса
     public void setBalance(double updatedBalance) {
         if (updatedBalance >= 0) {
             this.balance = updatedBalance; // Обновляем баланс
         }
     }
 }
+
 
 
 

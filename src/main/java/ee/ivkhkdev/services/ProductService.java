@@ -1,57 +1,49 @@
 package ee.ivkhkdev.services;
-
 import ee.ivkhkdev.helpers.ProductAppHelper;
 import ee.ivkhkdev.model.Product;
-import ee.ivkhkdev.interfaces.Service;
-import ee.ivkhkdev.interfaces.Input;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProductService implements Service<Product> {
+@Service
+public class ProductService {
     private final ProductAppHelper productAppHelper;
-    private final List<Product> productList; // Assume product list is handled in memory or fetched from database
+    private final List<Product> productList;
 
-    public ProductService(ProductAppHelper productAppHelper, List<Product> productList) {
+    public ProductService(ProductAppHelper productAppHelper) {
         this.productAppHelper = productAppHelper;
-        this.productList = productList;
+        this.productList = new ArrayList<>(); // Если это новый список продуктов
     }
 
-    @Override
     public boolean add() {
-        // Using the ProductAppHelper to create a new product
-        Product newProduct = productAppHelper.create(); // Collects product data from the user input
-        productList.add(newProduct); // Adds the new product to the product list or database
+        // Логика добавления продукта
+        Product newProduct = productAppHelper.create();
+        productList.add(newProduct);
         return true;
     }
 
-    @Override
     public boolean print() {
-        return productAppHelper.printList(productList); // Prints the list using the helper
+        return productAppHelper.printList(productList);
     }
 
-    @Override
     public boolean edit() {
-        // You can implement logic to update a product, using productAppHelper or other methods
-        // The implementation would depend on the actual requirements (e.g., selecting a product to modify)
         return false;
     }
 
-    @Override
     public boolean remove() {
-        // Implement the logic to remove a product (e.g., by selecting a product to delete)
         return false;
     }
 
-    @Override
     public List<Product> list() {
-        return productList; // Returns the list of products
+        return productList;
     }
 
-    @Override
     public List<Product> SortedCustomer() {
-        // Sorting logic can be implemented here if needed
-        return List.of(); // Placeholder
+        return List.of();
     }
 }
+
+
 
 

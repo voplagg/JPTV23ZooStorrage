@@ -3,9 +3,11 @@ package ee.ivkhkdev.helpers;
 import ee.ivkhkdev.interfaces.AppHelper;
 import ee.ivkhkdev.interfaces.Input;
 import ee.ivkhkdev.model.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductAppHelper implements AppHelper<Product> {
     private final Input input;
 

@@ -10,23 +10,14 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // ID продукта (будет сгенерирован автоматически)
+    private Long id;   // Идентификатор продукта (будет генерироваться автоматически)
 
-    private String name;  // Название продукта
-    private double price; // Цена продукта
-    private int quantity; // Количество продукта
-
-    // Пустой конструктор
-    public Product() {}
-
-    // Конструктор с параметрами
-    public Product(String name, double price, int quantity) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-    }
+    private String name;    // Название продукта
+    private double price;   // Цена продукта
+    private int quantity;   // Количество продукта на складе
 
     // Геттеры и сеттеры
+
     public Long getId() {
         return id;
     }
@@ -58,4 +49,10 @@ public class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "Product{id=" + id + ", name='" + name + "', price=" + price + ", quantity=" + quantity + "}";
+    }
 }
+
